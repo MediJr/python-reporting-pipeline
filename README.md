@@ -189,8 +189,12 @@ The [powerbi/](powerbi/README.md) folder contains a **Power BI project (PBIP)** 
 What was really done in this environment: the project was opened in Power BI Desktop 2.157, refreshed
 from the exported CSV files, its DAX measures queried through the local engine and compared with the
 pipeline exports (174 values, 0 differences), and the pages were captured. **Not done:** no `.pbix` file
-was saved and nothing was published to the Power BI service. To open it yourself, set the `DataFolder`
-parameter to your export folder ([powerbi/README.md](powerbi/README.md)).
+was saved and nothing was published to the Power BI service.
+
+To open it: run `python scripts/demo.py` (or `python scripts/build_powerbi_project.py --local` after a
+run), open `output/powerbi-project/SalesPerformance.pbip` and click **Refresh**. The versioned project in
+`powerbi/project/` uses a placeholder data folder and fails to refresh until its `DataFolder` parameter is
+set ([powerbi/README.md](powerbi/README.md#open-the-report)).
 
 | Trends and comparisons | Data quality |
 | --- | --- |

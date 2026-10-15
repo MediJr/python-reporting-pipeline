@@ -5,7 +5,8 @@
 1. checks the configuration and the sources (read-only);
 2. runs the pipeline (staging, star schema, marts, KPIs, quality checks, Power BI exports);
 3. recomputes the results independently from the raw CSV files (scripts/verify_results.py);
-4. prints where the reports and the Power BI files are.
+4. writes a Power BI project that points at this clone's exports (output/powerbi-project/);
+5. prints where the reports and the Power BI files are.
 
 Use ``--postgres`` to run step 2 against PostgreSQL instead (REPORTING_PG_DSN must be set; see
 scripts/pg_demo.py for a disposable local server).
@@ -37,7 +38,10 @@ def main() -> int:
     step("1. Check the configuration and the sources", "-m", "reporting_pipeline", "check", "--config", config)
     step("2. Run the pipeline", "-m", "reporting_pipeline", "run", "--config", config)
     step("3. Independent recomputation of the results", "scripts/verify_results.py", "data/sample", exports)
-    print(f"\nPower BI files: {exports}/  (open powerbi/project/SalesPerformance.pbip, see powerbi/README.md)")
+    if not args.postgres:
+        step("4. Power BI project pointing at these exports", "scripts/build_powerbi_project.py", "--local")
+    print(f"\nPower BI files: {exports}/")
+    print("Power BI report: output/powerbi-project/SalesPerformance.pbip (open it, then click Refresh)")
     print("Run reports:    runs/<timestamp>_<run id>/quality_report.md")
     return 0
 

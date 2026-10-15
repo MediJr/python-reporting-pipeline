@@ -98,3 +98,19 @@ def test_comparison_script_detects_differences(project):
     dax["monthly"][3]["[orders]"] += 1
     _, problems = compare(dax, folder)
     assert len(problems) == 2 and any("net_sales" in p for p in problems)
+
+
+def test_local_project_points_at_this_clone_exports(generator, tmp_path, monkeypatch, capsys):
+    """--local writes a project that opens without editing the DataFolder parameter."""
+    monkeypatch.setattr(generator, "ROOT", tmp_path)
+    (tmp_path / "powerbi").mkdir()
+    monkeypatch.setattr("sys.argv", ["build_powerbi_project.py", "--local"])
+    assert generator.main() == 1  # no exports yet: refused with a hint
+    assert "run 'reporting-pipeline run" in capsys.readouterr().out
+    exports = tmp_path / "output" / "powerbi"
+    exports.mkdir(parents=True)
+    (exports / "fact_sales.csv").write_text("x\n", encoding="utf-8")
+    assert generator.main() == 0
+    model = tmp_path / "output/powerbi-project" / f"{generator.NAME}.SemanticModel/definition/expressions.tmdl"
+    assert f'expression DataFolder = "{exports}"' in model.read_text(encoding="utf-8")
+    assert generator.PLACEHOLDER not in model.read_text(encoding="utf-8")

@@ -108,7 +108,7 @@ Independent recomputation: net sales 5069715.72 EUR, 3898 orders, 9774 fact rows
 ```
 
 The script re-implements the rules from the documentation with the standard library only and never
-imports the package. `python scripts/demo.py` chains steps 3, 4 and 7.
+imports the package. `python scripts/demo.py` chains steps 3, 4, 7 and the Power BI project of step 10.
 
 ## 8. Files for Power BI
 
@@ -136,9 +136,13 @@ imports the package. `python scripts/demo.py` chains steps 3, 4 and 7.
 
 ## 10. The dashboard
 
-Open `powerbi/project/SalesPerformance.pbip` in Power BI Desktop, set the `DataFolder` parameter to the
-absolute path of `output/powerbi`, apply and refresh — step by step in
-[powerbi/README.md](../powerbi/README.md). The three pages (Overview, Trends and comparisons, Data
+```powershell
+.venv\Scripts\python.exe scripts\build_powerbi_project.py --local
+```
+
+This writes `output/powerbi-project/SalesPerformance.pbip`, whose `DataFolder` parameter is the absolute
+path of this clone's `output/powerbi` (`scripts/demo.py` already ran it). Open it in Power BI Desktop and
+click **Refresh** — details in [powerbi/README.md](../powerbi/README.md#open-the-report). The three pages (Overview, Trends and comparisons, Data
 quality) then show the values above; they were checked against the pipeline exports with
 `powerbi/validation/query_model.ps1` and `scripts/compare_powerbi_results.py` (174 values, 0
 differences).

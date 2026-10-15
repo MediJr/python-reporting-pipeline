@@ -51,19 +51,26 @@ Year, category and segment slicers are on the first two pages.
 Requires Power BI Desktop with Power BI Project (PBIP) support; validated with version 2.157
 (August 2026).
 
-1. Run the pipeline so that `output/powerbi/` exists (`reporting-pipeline run --config config/pipeline.toml`).
-2. Either generate a local copy that points at your exports:
+1. Run the pipeline, then generate a copy of the project that points at this clone's exports:
 
    ```powershell
-   .venv\Scripts\python.exe scripts\build_powerbi_project.py --output output\powerbi-project --data-folder "C:\path\to\python-reporting-pipeline\output\powerbi"
+   .venv\Scripts\reporting-pipeline.exe run --config config/pipeline.toml
+   .venv\Scripts\python.exe scripts\build_powerbi_project.py --local
    ```
 
-   and open `output\powerbi-project\SalesPerformance.pbip`; **or** open
-   `powerbi\project\SalesPerformance.pbip`, then *Transform data* → *Edit parameters* → set `DataFolder`
-   to the absolute path of `output\powerbi`, and apply.
-3. Click **Refresh**. The project is stored without data, so visuals are empty until the first refresh
+   (`python scripts/demo.py` does both.)
+2. Open **`output\powerbi-project\SalesPerformance.pbip`** in Power BI Desktop.
+3. Click **Refresh**. The project is stored without data, so visuals show *(Blank)* until the first refresh
    (Power BI shows a banner saying that tables have no data and relationships must be refreshed).
 4. Optionally save as `.pbix` (*File* → *Save as*) to share a single file with data.
+
+> **Do not open `powerbi\project\SalesPerformance.pbip` directly** unless you change its parameter:
+> it is the versioned copy, and its `DataFolder` parameter is the placeholder
+> `C:\CHANGE-ME\python-reporting-pipeline\output\powerbi` (Power BI only accepts absolute paths, and a
+> path of the author's machine would be wrong on yours). Opened as is, the refresh fails with
+> *"Impossible de trouver une partie du chemin d'accès 'C:\CHANGE-ME\...'"* / *"Could not find a part of
+> the path"*. To fix it in Power BI: *Transform data* → *Edit parameters* → set `DataFolder` to the
+> absolute path of your `output\powerbi` folder → *Apply changes* → *Refresh*.
 
 ## What was validated, and what was not
 

@@ -1,12 +1,14 @@
 """Generate the Power BI project (PBIP: TMDL semantic model + PBIR report) from one specification.
 
+    python scripts/build_powerbi_project.py --local              # ready to open: output/powerbi-project/, data
+                                                                 # folder = this clone's output/powerbi
     python scripts/build_powerbi_project.py                      # committed version (placeholder data folder)
     python scripts/build_powerbi_project.py --data-folder "D:/work/python-reporting-pipeline/output/powerbi" \
         --output output/powerbi-project                          # local copy pointing at your exports
 
 Power BI cannot use relative paths in Power Query, so the data folder is a model parameter
-(``DataFolder``). The committed project uses a clearly fake placeholder; either regenerate a local
-copy with ``--data-folder`` or change the parameter in Power BI Desktop (Transform data > Edit parameters).
+(``DataFolder``). The committed project uses a clearly fake placeholder, so opening it directly fails
+until the parameter is changed; ``--local`` writes a copy that opens as is (also done by scripts/demo.py).
 
 Everything is generated from the tables, measures and pages declared below, so the model, the report
 and ``powerbi/measures.dax`` cannot drift apart.
@@ -788,9 +790,24 @@ def main() -> int:
     parser.add_argument(
         "--active-page", default=PAGES[0][0], choices=[p[0] for p in PAGES], help="page shown when the report opens"
     )
+    parser.add_argument(
+        "--local",
+        action="store_true",
+        help="ready-to-open copy for this clone: output/powerbi-project, data folder = this clone's output/powerbi",
+    )
     args = parser.parse_args()
+    if args.local:
+        exports = ROOT / "output" / "powerbi"
+        if not (exports / "fact_sales.csv").is_file():
+            print(
+                "output/powerbi/ has no exports yet: run 'reporting-pipeline run --config config/pipeline.toml' first"
+            )
+            return 1
+        args.output, args.data_folder = ROOT / "output" / "powerbi-project", str(exports)
     output = args.output if args.output.is_absolute() else (Path.cwd() / args.output)
     write(output, args.data_folder.replace("/", "\\"), args.active_page)
+    if args.local:
+        print(f"Open {output / f'{NAME}.pbip'} in Power BI Desktop, then click Refresh.")
     (ROOT / "powerbi" / "measures.dax").write_bytes(measures_dax().encode("utf-8"))
     (ROOT / "powerbi" / "theme.json").write_bytes((json.dumps(theme(), indent=2) + "\n").encode("utf-8"))
     print(f"Power BI project written to {output} (data folder: {args.data_folder})")
