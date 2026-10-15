@@ -1,0 +1,29 @@
+# Demo configuration: SQLite warehouse (no server needed). Every path is relative to `root`.
+# Run: reporting-pipeline run --config config/pipeline.toml
+
+[project]
+name = "monthly-sales-reporting"
+root = ".."                         # the project folder (relative to this file)
+
+[sources]
+connector = "csv"
+directory = "data/sample"
+encoding = "utf-8"
+delimiter = ","
+
+[sources.files]
+orders = "orders.csv"
+order_lines = "order_lines.csv"
+products = "products.csv"
+
+[warehouse]
+engine = "sqlite"
+sqlite_path = "output/warehouse.sqlite"
+
+[outputs]
+powerbi_dir = "output/powerbi"      # replaced as a whole by each successful run
+runs_dir = "runs"                   # one folder per run, never overwritten
+
+[quality]
+# a run fails (nothing is published) if a source has a larger share of rejected rows
+max_rejected_rate = { orders = 0.01, order_lines = 0.01, products = 0.05 }

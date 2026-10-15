@@ -1,0 +1,65 @@
+table Product
+	lineageTag: ddabdec4-0b93-5f77-8581-d5c2747da3b6
+
+	column product_id
+		dataType: string
+		lineageTag: 72e51556-6474-5244-ba8c-052698391439
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_name
+		dataType: string
+		lineageTag: d9055b37-67c7-5d33-8ad3-e5633ee81cf4
+		summarizeBy: none
+		sourceColumn: product_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		lineageTag: edf28105-f7b9-5073-86d3-6b55cd56101b
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_cost
+		dataType: decimal
+		formatString: €#,0.00;-€#,0.00;€#,0.00
+		lineageTag: 431f2ef9-5b2d-56f0-b00e-b9a9321805b9
+		summarizeBy: none
+		sourceColumn: unit_cost
+
+		annotation SummarizationSetBy = Automatic
+
+	column list_price
+		dataType: decimal
+		formatString: €#,0.00;-€#,0.00;€#,0.00
+		lineageTag: 6617c25d-0b6a-5792-b688-306b67f4a703
+		summarizeBy: none
+		sourceColumn: list_price
+
+		annotation SummarizationSetBy = Automatic
+
+	column launch_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 6b8a7a13-6ee9-5377-bf1b-bf1e89b20535
+		summarizeBy: none
+		sourceColumn: launch_date
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Product = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\dim_product.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"product_id", type text}, {"product_name", type text}, {"category", type text}, {"unit_cost", Currency.Type}, {"list_price", Currency.Type}, {"launch_date", type date}}, "en-US")
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table

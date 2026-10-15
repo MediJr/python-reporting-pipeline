@@ -1,0 +1,13 @@
+customer_segment,region,orders,customers,units,net_sales,gross_margin
+Consumer,East,481,335,3719,357008.59,143478.29
+Consumer,North,594,378,4767,426110.20,173607.50
+Consumer,South,486,335,3729,344156.98,140378.98
+Consumer,West,373,268,2880,263092.01,107561.31
+Corporate,East,202,83,7597,684948.10,262833.00
+Corporate,North,204,76,7618,719045.13,272429.13
+Corporate,South,208,81,7956,809378.87,307858.07
+Corporate,West,157,77,5749,566222.08,216896.08
+Small Business,East,293,175,2394,255861.36,102142.96
+Small Business,North,353,191,2616,250331.62,100610.42
+Small Business,South,317,184,2451,237745.89,94673.49
+Small Business,West,230,153,1907,155814.89,64860.09

@@ -1,0 +1,460 @@
+{
+  "refresh_seconds": 5.8,
+  "row_counts": [
+    {
+      "[sales_rows]": 9774,
+      "[calendar_rows]": 730,
+      "[product_rows]": 28,
+      "[quality_rows]": 19,
+      "[rejected_rows]": 23
+    }
+  ],
+  "totals": [
+    {
+      "[net_sales]": 5069715.72,
+      "[orders]": 3898,
+      "[units]": 53383,
+      "[customers]": 918,
+      "[aov]": 1300.5941,
+      "[margin]": 1987329.32,
+      "[margin_pct]": 0.39200014946794687,
+      "[discount_rate]": 0.049867186661471316,
+      "[cancellation_rate]": 0.06140139658078497,
+      "[rejected]": 23,
+      "[checks_passed]": 19,
+      "[checks_failed]": 0,
+      "[latest_mom]": 0.08771668175007924,
+      "[latest_yoy]": 0.1586728901795374
+    }
+  ],
+  "monthly": [
+    {
+      "Calendar[month_key]": 202407,
+      "Calendar[year_month]": "2024-07",
+      "[net_sales]": 136537.65,
+      "[net_sales_pm]": null,
+      "[mom]": null,
+      "[net_sales_py]": null,
+      "[yoy]": null,
+      "[orders]": 112,
+      "[ytd]": 136537.65
+    },
+    {
+      "Calendar[month_key]": 202408,
+      "Calendar[year_month]": "2024-08",
+      "[net_sales]": 156672.4,
+      "[net_sales_pm]": 136537.65,
+      "[mom]": 0.1474666511398138,
+      "[net_sales_py]": null,
+      "[yoy]": null,
+      "[orders]": 105,
+      "[ytd]": 293210.05
+    },
+    {
+      "Calendar[month_key]": 202409,
+      "Calendar[year_month]": "2024-09",
+      "[net_sales]": 166832.28,
+      "[net_sales_pm]": 156672.4,
+      "[mom]": 0.0648479247142445,
+      "[net_sales_py]": null,
+      "[yoy]": null,
+      "[orders]": 142,
+      "[ytd]": 460042.33
+    },
+    {
+      "Calendar[month_key]": 202410,
+      "Calendar[year_month]": "2024-10",
+      "[net_sales]": 192426.1,
+      "[net_sales_pm]": 166832.28,
+      "[mom]": 0.1534104790751526,
+      "[net_sales_py]": null,
+      "[yoy]": null,
+      "[orders]": 148,
+      "[ytd]": 652468.43
+    },
+    {
+      "Calendar[month_key]": 202411,
+      "Calendar[year_month]": "2024-11",
+      "[net_sales]": 232375.85,
+      "[net_sales_pm]": 192426.1,
+      "[mom]": 0.20761086983522506,
+      "[net_sales_py]": null,
+      "[yoy]": null,
+      "[orders]": 179,
+      "[ytd]": 884844.28
+    },
+    {
+      "Calendar[month_key]": 202412,
+      "Calendar[year_month]": "2024-12",
+      "[net_sales]": 267262.07,
+      "[net_sales_pm]": 232375.85,
+      "[mom]": 0.150128423414051,
+      "[net_sales_py]": null,
+      "[yoy]": null,
+      "[orders]": 209,
+      "[ytd]": 1152106.35
+    },
+    {
+      "Calendar[month_key]": 202501,
+      "Calendar[year_month]": "2025-01",
+      "[net_sales]": 127875.76,
+      "[net_sales_pm]": 267262.07,
+      "[mom]": -0.521534200494668,
+      "[net_sales_py]": null,
+      "[yoy]": null,
+      "[orders]": 124,
+      "[ytd]": 127875.76
+    },
+    {
+      "Calendar[month_key]": 202502,
+      "Calendar[year_month]": "2025-02",
+      "[net_sales]": 177647.35,
+      "[net_sales_pm]": 127875.76,
+      "[mom]": 0.3892183319184183,
+      "[net_sales_py]": null,
+      "[yoy]": null,
+      "[orders]": 134,
+      "[ytd]": 305523.11
+    },
+    {
+      "Calendar[month_key]": 202503,
+      "Calendar[year_month]": "2025-03",
+      "[net_sales]": 191903.61,
+      "[net_sales_pm]": 177647.35,
+      "[mom]": 0.08025033866252437,
+      "[net_sales_py]": null,
+      "[yoy]": null,
+      "[orders]": 147,
+      "[ytd]": 497426.72
+    },
+    {
+      "Calendar[month_key]": 202504,
+      "Calendar[year_month]": "2025-04",
+      "[net_sales]": 191777.63,
+      "[net_sales_pm]": 191903.61,
+      "[mom]": -0.0006564754045012493,
+      "[net_sales_py]": null,
+      "[yoy]": null,
+      "[orders]": 150,
+      "[ytd]": 689204.35
+    },
+    {
+      "Calendar[month_key]": 202505,
+      "Calendar[year_month]": "2025-05",
+      "[net_sales]": 244184.15,
+      "[net_sales_pm]": 191777.63,
+      "[mom]": 0.27326711671220466,
+      "[net_sales_py]": null,
+      "[yoy]": null,
+      "[orders]": 166,
+      "[ytd]": 933388.5
+    },
+    {
+      "Calendar[month_key]": 202506,
+      "Calendar[year_month]": "2025-06",
+      "[net_sales]": 198590.95,
+      "[net_sales_pm]": 244184.15,
+      "[mom]": -0.1867164596883131,
+      "[net_sales_py]": null,
+      "[yoy]": null,
+      "[orders]": 151,
+      "[ytd]": 1131979.45
+    },
+    {
+      "Calendar[month_key]": 202507,
+      "Calendar[year_month]": "2025-07",
+      "[net_sales]": 158126.39,
+      "[net_sales_pm]": 198590.95,
+      "[mom]": -0.2037583283628987,
+      "[net_sales_py]": 136537.65,
+      "[yoy]": 0.15811565527896518,
+      "[orders]": 131,
+      "[ytd]": 1290105.84
+    },
+    {
+      "Calendar[month_key]": 202508,
+      "Calendar[year_month]": "2025-08",
+      "[net_sales]": 167716.08,
+      "[net_sales_pm]": 158126.39,
+      "[mom]": 0.06064572776245635,
+      "[net_sales_py]": 156672.4,
+      "[yoy]": 0.07048899487082601,
+      "[orders]": 133,
+      "[ytd]": 1457821.92
+    },
+    {
+      "Calendar[month_key]": 202509,
+      "Calendar[year_month]": "2025-09",
+      "[net_sales]": 221133.46,
+      "[net_sales_pm]": 167716.08,
+      "[mom]": 0.31849885830863683,
+      "[net_sales_py]": 166832.28,
+      "[yoy]": 0.3254836534032862,
+      "[orders]": 171,
+      "[ytd]": 1678955.38
+    },
+    {
+      "Calendar[month_key]": 202510,
+      "Calendar[year_month]": "2025-10",
+      "[net_sales]": 251864.03,
+      "[net_sales_pm]": 221133.46,
+      "[mom]": 0.13896843110038617,
+      "[net_sales_py]": 192426.1,
+      "[yoy]": 0.3088870480667643,
+      "[orders]": 185,
+      "[ytd]": 1930819.41
+    },
+    {
+      "Calendar[month_key]": 202511,
+      "Calendar[year_month]": "2025-11",
+      "[net_sales]": 261601.07,
+      "[net_sales_pm]": 251864.03,
+      "[mom]": 0.03865990709352185,
+      "[net_sales_py]": 232375.85,
+      "[yoy]": 0.12576702785594976,
+      "[orders]": 218,
+      "[ytd]": 2192420.48
+    },
+    {
+      "Calendar[month_key]": 202512,
+      "Calendar[year_month]": "2025-12",
+      "[net_sales]": 316473.36,
+      "[net_sales_pm]": 261601.07,
+      "[mom]": 0.2097556022993331,
+      "[net_sales_py]": 267262.07,
+      "[yoy]": 0.18413121622533268,
+      "[orders]": 251,
+      "[ytd]": 2508893.84
+    },
+    {
+      "Calendar[month_key]": 202601,
+      "Calendar[year_month]": "2026-01",
+      "[net_sales]": 210809.33,
+      "[net_sales_pm]": 316473.36,
+      "[mom]": -0.3338796984365445,
+      "[net_sales_py]": 127875.76,
+      "[yoy]": 0.6485480125396713,
+      "[orders]": 149,
+      "[ytd]": 210809.33
+    },
+    {
+      "Calendar[month_key]": 202602,
+      "Calendar[year_month]": "2026-02",
+      "[net_sales]": 238750.97,
+      "[net_sales_pm]": 210809.33,
+      "[mom]": 0.13254460796398337,
+      "[net_sales_py]": 177647.35,
+      "[yoy]": 0.3439602110585945,
+      "[orders]": 159,
+      "[ytd]": 449560.3
+    },
+    {
+      "Calendar[month_key]": 202603,
+      "Calendar[year_month]": "2026-03",
+      "[net_sales]": 234970.75,
+      "[net_sales_pm]": 238750.97,
+      "[mom]": -0.01583331787091797,
+      "[net_sales_py]": 191903.61,
+      "[yoy]": 0.22442068703136955,
+      "[orders]": 178,
+      "[ytd]": 684531.05
+    },
+    {
+      "Calendar[month_key]": 202604,
+      "Calendar[year_month]": "2026-04",
+      "[net_sales]": 282536.68,
+      "[net_sales_pm]": 234970.75,
+      "[mom]": 0.2024334092647702,
+      "[net_sales_py]": 191777.63,
+      "[yoy]": 0.47325149445219444,
+      "[orders]": 182,
+      "[ytd]": 967067.73
+    },
+    {
+      "Calendar[month_key]": 202605,
+      "Calendar[year_month]": "2026-05",
+      "[net_sales]": 211545.85,
+      "[net_sales_pm]": 282536.68,
+      "[mom]": -0.25126234937000036,
+      "[net_sales_py]": 244184.15,
+      "[yoy]": -0.1336626476370395,
+      "[orders]": 193,
+      "[ytd]": 1178613.58
+    },
+    {
+      "Calendar[month_key]": 202606,
+      "Calendar[year_month]": "2026-06",
+      "[net_sales]": 230101.95,
+      "[net_sales_pm]": 211545.85,
+      "[mom]": 0.08771668175007924,
+      "[net_sales_py]": 198590.95,
+      "[yoy]": 0.1586728901795374,
+      "[orders]": 181,
+      "[ytd]": 1408715.53
+    }
+  ],
+  "categories": [
+    {
+      "Product[category]": "Accessories",
+      "[net_sales]": 158086.11,
+      "[share]": 0.03118244073851147
+    },
+    {
+      "Product[category]": "Furniture",
+      "[net_sales]": 1241242.04,
+      "[share]": 0.2448346433121106
+    },
+    {
+      "Product[category]": "Office Supplies",
+      "[net_sales]": 550230.28,
+      "[share]": 0.10853276798723539
+    },
+    {
+      "Product[category]": "Technology",
+      "[net_sales]": 3120157.29,
+      "[share]": 0.6154501479621426
+    }
+  ],
+  "products": [
+    {
+      "Product[product_name]": "Laptop 16in",
+      "[net_sales]": 1189828.25,
+      "[rank]": 1
+    },
+    {
+      "Product[product_name]": "Laptop 14in",
+      "[net_sales]": 982610.2,
+      "[rank]": 2
+    },
+    {
+      "Product[product_name]": "Standing Desk",
+      "[net_sales]": 385601.2,
+      "[rank]": 3
+    },
+    {
+      "Product[product_name]": "Meeting Table",
+      "[net_sales]": 364850.9,
+      "[rank]": 4
+    },
+    {
+      "Product[product_name]": "Printer Toner",
+      "[net_sales]": 280384.95,
+      "[rank]": 5
+    },
+    {
+      "Product[product_name]": "Monitor 27in",
+      "[net_sales]": 279150.2,
+      "[rank]": 6
+    },
+    {
+      "Product[product_name]": "Ergonomic Office Chair",
+      "[net_sales]": 239436.5,
+      "[rank]": 7
+    },
+    {
+      "Product[product_name]": "Monitor 24in",
+      "[net_sales]": 198422.9,
+      "[rank]": 8
+    },
+    {
+      "Product[product_name]": "Docking Station",
+      "[net_sales]": 172452.6,
+      "[rank]": 9
+    },
+    {
+      "Product[product_name]": "Noise-Cancelling Headset",
+      "[net_sales]": 116087.1,
+      "[rank]": 10
+    },
+    {
+      "Product[product_name]": "Filing Cabinet",
+      "[net_sales]": 113979.15,
+      "[rank]": 11
+    },
+    {
+      "Product[product_name]": "Bookshelf",
+      "[net_sales]": 109789.15,
+      "[rank]": 12
+    },
+    {
+      "Product[product_name]": "Heavy-Duty Stapler",
+      "[net_sales]": 92145.17,
+      "[rank]": 13
+    },
+    {
+      "Product[product_name]": "Mechanical Keyboard",
+      "[net_sales]": 85173.85,
+      "[rank]": 14
+    },
+    {
+      "Product[product_name]": "HD Webcam",
+      "[net_sales]": 67174.45,
+      "[rank]": 15
+    },
+    {
+      "Product[product_name]": "Binder Pack",
+      "[net_sales]": 56907.26,
+      "[rank]": 16
+    },
+    {
+      "Product[product_name]": "Laptop Backpack",
+      "[net_sales]": 52082.1,
+      "[rank]": 17
+    },
+    {
+      "Product[product_name]": "Notebook Pack",
+      "[net_sales]": 42519.72,
+      "[rank]": 18
+    },
+    {
+      "Product[product_name]": "USB-C Hub",
+      "[net_sales]": 41425.8,
+      "[rank]": 19
+    },
+    {
+      "Product[product_name]": "Gel Pen Set",
+      "[net_sales]": 33136.31,
+      "[rank]": 20
+    },
+    {
+      "Product[product_name]": "Wireless Mouse",
+      "[net_sales]": 29257.74,
+      "[rank]": 21
+    },
+    {
+      "Product[product_name]": "LED Desk Lamp",
+      "[net_sales]": 27585.14,
+      "[rank]": 22
+    },
+    {
+      "Product[product_name]": "Laptop Sleeve",
+      "[net_sales]": 25624.15,
+      "[rank]": 23
+    },
+    {
+      "Product[product_name]": "Sticky Notes Bundle",
+      "[net_sales]": 23053.83,
+      "[rank]": 24
+    },
+    {
+      "Product[product_name]": "Copy Paper Ream",
+      "[net_sales]": 22083.04,
+      "[rank]": 25
+    },
+    {
+      "Product[product_name]": "Cable Organizer Kit",
+      "[net_sales]": 15793.43,
+      "[rank]": 26
+    },
+    {
+      "Product[product_name]": "Phone Stand",
+      "[net_sales]": 14308.22,
+      "[rank]": 27
+    },
+    {
+      "Product[product_name]": "Screen Cleaning Kit",
+      "[net_sales]": 8852.41,
+      "[rank]": 28
+    }
+  ]
+}

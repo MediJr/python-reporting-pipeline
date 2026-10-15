@@ -1,0 +1,29 @@
+product_id,product_name,category,orders,units,net_sales,gross_margin,margin_rate,sales_rank,category_rank
+P002,Laptop 16in,Technology,359,1190,1189828.25,368728.25,0.3099,1,1
+P001,Laptop 14in,Technology,383,1301,982610.20,306090.20,0.3115,2,2
+P011,Standing Desk,Furniture,295,904,385601.20,150561.20,0.3905,3,1
+P015,Meeting Table,Furniture,220,643,364850.90,165520.90,0.4537,4,2
+P022,Printer Toner,Office Supplies,378,4257,280384.95,135646.95,0.4838,5,1
+P004,Monitor 27in,Technology,374,1134,279150.20,92040.20,0.3297,6,3
+P010,Ergonomic Office Chair,Furniture,279,865,239436.50,114011.50,0.4762,7,3
+P003,Monitor 24in,Technology,395,1234,198422.90,68852.90,0.3470,8,4
+P009,Docking Station,Technology,384,1221,172452.60,65004.60,0.3769,9,5
+P007,Noise-Cancelling Headset,Technology,278,949,116087.10,57249.10,0.4932,10,6
+P013,Filing Cabinet,Furniture,246,755,113979.15,49804.15,0.4370,11,4
+P012,Bookshelf,Furniture,261,837,109789.15,51199.15,0.4663,12,5
+P019,Heavy-Duty Stapler,Office Supplies,419,4872,92145.17,51220.37,0.5559,13,2
+P006,Mechanical Keyboard,Technology,372,1134,85173.85,42081.85,0.4941,14,7
+P008,HD Webcam,Technology,379,1207,67174.45,38206.45,0.5688,15,8
+P020,Binder Pack,Office Supplies,418,4640,56907.26,32315.26,0.5679,16,3
+P023,Laptop Backpack,Accessories,247,1115,52082.10,28667.10,0.5504,17,1
+P017,Notebook Pack,Office Supplies,388,4520,42519.72,23987.72,0.5642,18,4
+P027,USB-C Hub,Accessories,255,1113,41425.80,24730.80,0.5970,19,2
+P018,Gel Pen Set,Office Supplies,403,4407,33136.31,19033.91,0.5744,20,5
+P005,Wireless Mouse,Technology,393,1237,29257.74,17506.24,0.5983,21,9
+P014,LED Desk Lamp,Furniture,283,832,27585.14,15937.14,0.5777,22,6
+P024,Laptop Sleeve,Accessories,243,1175,25624.15,16224.15,0.6332,23,3
+P021,Sticky Notes Bundle,Office Supplies,387,4096,23053.83,14452.23,0.6269,24,6
+P016,Copy Paper Ream,Office Supplies,376,4230,22083.04,11085.04,0.5020,25,7
+P025,Cable Organizer Kit,Accessories,253,1105,15793.43,10820.93,0.6852,26,4
+P026,Phone Stand,Accessories,259,1174,14308.22,9847.02,0.6882,27,5
+P028,Screen Cleaning Kit,Accessories,256,1236,8852.41,6504.01,0.7347,28,6

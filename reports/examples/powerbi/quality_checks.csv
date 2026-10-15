@@ -1,0 +1,20 @@
+name,category,passed,expected,actual,detail
+rejected_rate_orders,gate,true,<= 1.00%,0.14%,6 of 4159 orders row(s) rejected
+rejected_rate_order_lines,gate,true,<= 1.00%,0.16%,16 of 9790 order_lines row(s) rejected
+rejected_rate_products,gate,true,<= 5.00%,3.45%,1 of 29 products row(s) rejected
+fact_rows_match_valid_lines,reconciliation,true,9774,9774,accepted order lines minus lines rejected by referential integrity = fact rows (no row lost or multiplied)
+fact_key_unique,integrity,true,9774,9774,"one fact row per (order_id, line_number)"
+fact_products_in_dimension,integrity,true,0,0,fact rows whose product is missing from dim_product
+fact_dates_in_dimension,integrity,true,0,0,fact rows whose date is missing from dim_date
+fact_critical_nulls,integrity,true,0,0,missing values in key or amount columns of the fact table
+dim_date_continuous,integrity,true,730,730,calendar from 20240701 to 20260630 without duplicate days
+net_sales_python_vs_sql,reconciliation,true,506971572,506971572,net sales recomputed in Python from the source rows = SQL fact total (cents)
+mart_monthly_sales_net_sales,reconciliation,true,506971572,506971572,total net sales of mart_monthly_sales = fact total (cents)
+mart_category_monthly_net_sales,reconciliation,true,506971572,506971572,total net sales of mart_category_monthly = fact total (cents)
+mart_product_performance_net_sales,reconciliation,true,506971572,506971572,total net sales of mart_product_performance = fact total (cents)
+mart_segment_region_net_sales,reconciliation,true,506971572,506971572,total net sales of mart_segment_region = fact total (cents)
+monthly_orders,reconciliation,true,3898,3898,sum of monthly orders = distinct completed orders (an order belongs to one month)
+segment_orders,reconciliation,true,3898,3898,sum of orders per segment and region = distinct completed orders
+monthly_units,reconciliation,true,53383,53383,sum of monthly units = fact units
+category_shares_sum_to_100pct,reconciliation,true,[],[],category shares of each month add up to 100 % (within rounding of 1 bp per category)
+orders_without_valid_lines,info,true,-,0,accepted orders with no valid line: not in the fact table (they have no amount)

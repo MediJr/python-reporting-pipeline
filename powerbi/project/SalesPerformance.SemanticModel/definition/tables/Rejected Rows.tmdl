@@ -1,0 +1,54 @@
+table 'Rejected Rows'
+	lineageTag: 79b75fab-77f9-5275-b4f3-cb3f14e5518a
+
+	column source_table
+		dataType: string
+		lineageTag: 5f717edd-2718-5990-8e4f-a4b83577beca
+		summarizeBy: none
+		sourceColumn: source_table
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_line
+		dataType: int64
+		lineageTag: cb739741-10a3-5735-ad37-c35f367ca785
+		summarizeBy: none
+		sourceColumn: source_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column reason
+		dataType: string
+		lineageTag: b0d93869-eb42-5f51-971c-9d58ddefe990
+		summarizeBy: none
+		sourceColumn: reason
+
+		annotation SummarizationSetBy = Automatic
+
+	column column_name
+		dataType: string
+		lineageTag: 1153f85b-c703-59db-b0ff-906f8e896903
+		summarizeBy: none
+		sourceColumn: column_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column message
+		dataType: string
+		lineageTag: 8fd8d8f0-bec9-5055-934b-1df67783eea3
+		summarizeBy: none
+		sourceColumn: message
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Rejected Rows' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\rejected_rows.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"source_table", type text}, {"source_line", Int64.Type}, {"reason", type text}, {"column_name", type text}, {"message", type text}}, "en-US")
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table

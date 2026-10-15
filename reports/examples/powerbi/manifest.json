@@ -1,0 +1,190 @@
+{
+  "run_id": "83c5dbc3-3281-45d9-8505-04d613789b7a",
+  "generated_at": "2026-10-14T23:52:51.078Z",
+  "project": "monthly-sales-reporting",
+  "engine": "sqlite",
+  "format": {
+    "encoding": "utf-8",
+    "bom": false,
+    "delimiter": ",",
+    "decimal_separator": ".",
+    "line_terminator": "LF",
+    "dates": "YYYY-MM-DD",
+    "currency": "EUR",
+    "amounts": "*_cents columns exported as decimal amounts without the suffix",
+    "ratios": "*_bp columns exported as ratios (0.1500 = 15 %) without the suffix"
+  },
+  "sources": {
+    "orders": {
+      "file": "data/sample/orders.csv",
+      "sha256": "e4a2bf4e269387958156fb195f66fe3ae46bedbe156a7ebdf993b4c48f033824"
+    },
+    "order_lines": {
+      "file": "data/sample/order_lines.csv",
+      "sha256": "f3d8e728cc87d49cb394612943f7a4b68e2a34a3e630ae85f9f8c8b5f1891b60"
+    },
+    "products": {
+      "file": "data/sample/products.csv",
+      "sha256": "6d9200d19481fc92f2ed89fbd6ac4c982551823706d50dec2562321200e60b9c"
+    }
+  },
+  "files": [
+    {
+      "name": "dim_date.csv",
+      "rows": 730,
+      "columns": [
+        "date_key",
+        "full_date",
+        "year",
+        "quarter",
+        "month",
+        "month_key",
+        "month_start",
+        "month_name",
+        "year_month",
+        "day_of_month",
+        "iso_weekday",
+        "is_weekend"
+      ],
+      "sha256": "ce9954fcb3662839f8f2819894671471b995f8e0f8bdfcd53f3f69930d5092c4"
+    },
+    {
+      "name": "dim_product.csv",
+      "rows": 28,
+      "columns": [
+        "product_id",
+        "product_name",
+        "category",
+        "unit_cost",
+        "list_price",
+        "launch_date"
+      ],
+      "sha256": "45c10f0b77b6478650625ef1a58e498b45c881dd0b17ec85147f95881d2a37dd"
+    },
+    {
+      "name": "fact_sales.csv",
+      "rows": 9774,
+      "columns": [
+        "order_id",
+        "line_number",
+        "date_key",
+        "order_date",
+        "product_id",
+        "customer_id",
+        "customer_segment",
+        "region",
+        "sales_channel",
+        "order_status",
+        "is_completed",
+        "quantity",
+        "unit_price",
+        "discount_rate",
+        "gross_amount",
+        "discount_amount",
+        "net_amount",
+        "cost_amount",
+        "margin_amount"
+      ],
+      "sha256": "b47b58d6e4e7e05fac7ba7741129c23db4aebd2a8c1cf8649a4bc1d53f227ca5"
+    },
+    {
+      "name": "mart_monthly_sales.csv",
+      "rows": 24,
+      "columns": [
+        "month_key",
+        "month_start",
+        "year_month",
+        "orders",
+        "cancelled_orders",
+        "active_customers",
+        "units",
+        "gross_sales",
+        "discount_amount",
+        "net_sales",
+        "cost_amount",
+        "gross_margin",
+        "prev_month_net_sales",
+        "prev_year_net_sales"
+      ],
+      "sha256": "1d4ad6a479925b4c5481198196548b3d2b0871e748de3698ae4fbc9cf34d350d"
+    },
+    {
+      "name": "mart_category_monthly.csv",
+      "rows": 96,
+      "columns": [
+        "month_key",
+        "year_month",
+        "category",
+        "orders",
+        "units",
+        "net_sales",
+        "gross_margin",
+        "share_of_month"
+      ],
+      "sha256": "d4e1cf5e82723ac52f34ac1e5b7597ecd82682d2acfdc17228474faeefa52929"
+    },
+    {
+      "name": "mart_product_performance.csv",
+      "rows": 28,
+      "columns": [
+        "product_id",
+        "product_name",
+        "category",
+        "orders",
+        "units",
+        "net_sales",
+        "gross_margin",
+        "margin_rate",
+        "sales_rank",
+        "category_rank"
+      ],
+      "sha256": "39beced3a7930295b7c342e2efcd0dd1866836dac40b0c03fed0a43b771bde79"
+    },
+    {
+      "name": "mart_segment_region.csv",
+      "rows": 12,
+      "columns": [
+        "customer_segment",
+        "region",
+        "orders",
+        "customers",
+        "units",
+        "net_sales",
+        "gross_margin"
+      ],
+      "sha256": "1d0954624ab3aface1c1a9f6e726119bcc2affb6db37eac847e9ba25b106661e"
+    },
+    {
+      "name": "kpi_summary.csv",
+      "rows": 16,
+      "columns": [
+        "position",
+        "kpi",
+        "label",
+        "value",
+        "unit",
+        "period",
+        "definition"
+      ],
+      "sha256": "77f9c014491a6d0ba4ee6177b53b5b912888067393730ec3fe11af1497a28274"
+    },
+    {
+      "name": "rejected_rows.csv",
+      "rows": 23,
+      "columns": [
+        "source_table",
+        "source_line",
+        "reason",
+        "column_name",
+        "message"
+      ],
+      "sha256": "9d3c9dc9002cbb5516644e7ef08fc8044760b9c72143dd89848f3150ee87fe93"
+    },
+    {
+      "name": "quality_checks.csv",
+      "rows": 19,
+      "columns": [],
+      "sha256": "ac0a52c6dc6975d5230a0064d87085fc016a9700f4f488a1dbd061151b076a1a"
+    }
+  ]
+}

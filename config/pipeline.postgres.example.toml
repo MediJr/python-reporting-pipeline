@@ -1,0 +1,29 @@
+# Example configuration for a PostgreSQL warehouse. The values below are FICTITIOUS examples.
+# The connection string is never written here: it is read from the environment variable named in
+# `connection_env`, e.g. (PowerShell)  $env:REPORTING_PG_DSN = "host=127.0.0.1 port=55432 dbname=reporting_demo user=reporting"
+# For a local, disposable demo server see scripts/pg_demo.py and docs/demo.md.
+
+[project]
+name = "monthly-sales-reporting"
+root = ".."
+
+[sources]
+connector = "csv"
+directory = "data/sample"
+
+[sources.files]
+orders = "orders.csv"
+order_lines = "order_lines.csv"
+products = "products.csv"
+
+[warehouse]
+engine = "postgres"
+connection_env = "REPORTING_PG_DSN"   # name of the environment variable, not the connection string
+schema = "reporting"                  # created by the pipeline; an existing schema it did not create is refused
+
+[outputs]
+powerbi_dir = "output/powerbi-postgres"
+runs_dir = "runs"
+
+[quality]
+max_rejected_rate = { orders = 0.01, order_lines = 0.01, products = 0.05 }

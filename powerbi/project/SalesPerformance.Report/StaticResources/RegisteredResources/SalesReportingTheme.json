@@ -1,0 +1,36 @@
+{
+  "name": "Sales Reporting",
+  "dataColors": [
+    "#1F4E79",
+    "#2E86AB",
+    "#F18F01",
+    "#C73E1D",
+    "#3B8B5A",
+    "#6C5B7B",
+    "#8D99AE",
+    "#E9C46A"
+  ],
+  "background": "#FFFFFF",
+  "foreground": "#1F2937",
+  "tableAccent": "#1F4E79",
+  "good": "#3B8B5A",
+  "bad": "#C73E1D",
+  "neutral": "#F18F01",
+  "textClasses": {
+    "title": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 12,
+      "color": "#1F2937"
+    },
+    "label": {
+      "fontFace": "Segoe UI",
+      "fontSize": 10,
+      "color": "#374151"
+    },
+    "callout": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 24,
+      "color": "#1F4E79"
+    }
+  }
+}

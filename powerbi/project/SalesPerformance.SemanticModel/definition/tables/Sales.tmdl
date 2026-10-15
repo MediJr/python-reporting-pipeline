@@ -1,0 +1,321 @@
+table Sales
+	lineageTag: 5e30b2b7-e4e7-5a2f-af93-6386c1f1c9aa
+
+	/// Net line amounts (after discount) of completed orders
+	measure 'Net Sales' = CALCULATE ( SUM ( Sales[net_amount] ), Sales[is_completed] = 1 )
+		formatString: €#,0;-€#,0;€#,0
+		displayFolder: Sales
+		lineageTag: 36092060-beec-5591-8e38-1d5c12d56f49
+
+	/// Quantity x unit price of completed orders, before discount
+	measure 'Gross Sales' = CALCULATE ( SUM ( Sales[gross_amount] ), Sales[is_completed] = 1 )
+		formatString: €#,0;-€#,0;€#,0
+		displayFolder: Sales
+		lineageTag: af3a91c9-b3e6-5d1c-ba70-c61281e35e8e
+
+	/// Discounts granted on completed orders
+	measure 'Discount Amount' = CALCULATE ( SUM ( Sales[discount_amount] ), Sales[is_completed] = 1 )
+		formatString: €#,0;-€#,0;€#,0
+		displayFolder: Sales
+		lineageTag: dc5afe9b-071f-55c6-80c6-1801fbb9d348
+
+	/// Completed orders
+	measure 'Orders' = CALCULATE ( DISTINCTCOUNT ( Sales[order_id] ), Sales[is_completed] = 1 )
+		formatString: #,0
+		displayFolder: Volume
+		lineageTag: a5582a4c-d563-503b-8964-4b2cbdc5af7e
+
+	/// Quantity of completed order lines
+	measure 'Units Sold' = CALCULATE ( SUM ( Sales[quantity] ), Sales[is_completed] = 1 )
+		formatString: #,0
+		displayFolder: Volume
+		lineageTag: fba975a3-23a5-5025-830d-72fc2d9a2617
+
+	/// Distinct customers with a completed order
+	measure 'Active Customers' = CALCULATE ( DISTINCTCOUNT ( Sales[customer_id] ), Sales[is_completed] = 1 )
+		formatString: #,0
+		displayFolder: Volume
+		lineageTag: a3d4a6ad-3fbd-50df-af48-8d620abd0a53
+
+	/// Cancelled orders
+	measure 'Cancelled Orders' = CALCULATE ( DISTINCTCOUNT ( Sales[order_id] ), Sales[is_completed] = 0 )
+		formatString: #,0
+		displayFolder: Volume
+		lineageTag: 7b8b5f39-5a2e-5d56-a6b1-5fa1c83a19da
+
+	/// Cancelled orders / all orders
+	measure 'Cancellation Rate' = DIVIDE ( [Cancelled Orders], [Orders] + [Cancelled Orders] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Volume
+		lineageTag: a214facf-1270-5278-ab2f-5949d5412a3f
+
+	/// Net sales / orders
+	measure 'Average Order Value' = DIVIDE ( [Net Sales], [Orders] )
+		formatString: €#,0.00;-€#,0.00;€#,0.00
+		displayFolder: Sales
+		lineageTag: 98686e59-36f8-59c9-8f9b-b8888e9dfeb3
+
+	/// Net sales - quantity x catalog unit cost
+	measure 'Gross Margin' = CALCULATE ( SUM ( Sales[margin_amount] ), Sales[is_completed] = 1 )
+		formatString: €#,0;-€#,0;€#,0
+		displayFolder: Profitability
+		lineageTag: 65d6231d-906a-58fb-830c-e3c301b8610d
+
+	/// Gross margin / net sales
+	measure 'Gross Margin %' = DIVIDE ( [Gross Margin], [Net Sales] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Profitability
+		lineageTag: ee8894fb-bcfd-53cb-85a0-a96d852b4ad8
+
+	/// Discount amount / gross sales
+	measure 'Discount Rate' = DIVIDE ( [Discount Amount], [Gross Sales] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Sales
+		lineageTag: 93987e5a-4f4f-51af-8e59-937eec9c0a3d
+
+	/// Net sales of the previous month (same filter context)
+	measure 'Net Sales PM' = CALCULATE ( [Net Sales], DATEADD ( Calendar[full_date], -1, MONTH ) )
+		formatString: €#,0;-€#,0;€#,0
+		displayFolder: Comparisons
+		lineageTag: 0ff3521f-77f1-5c65-9e33-62941f169fa6
+
+	/// Change versus the previous month
+	measure 'MoM Growth %' = DIVIDE ( [Net Sales] - [Net Sales PM], [Net Sales PM] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Comparisons
+		lineageTag: c413db83-91c3-5d51-82a0-1a1354c1c1ec
+
+	/// Net sales of the same period one year earlier
+	measure 'Net Sales PY' = CALCULATE ( [Net Sales], SAMEPERIODLASTYEAR ( Calendar[full_date] ) )
+		formatString: €#,0;-€#,0;€#,0
+		displayFolder: Comparisons
+		lineageTag: 87ba65ff-f3a8-53c6-b798-0d174a2ab2ce
+
+	/// Change versus the same period one year earlier
+	measure 'YoY Growth %' = DIVIDE ( [Net Sales] - [Net Sales PY], [Net Sales PY] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Comparisons
+		lineageTag: 4cadf9dc-6da7-506d-b84f-c7d14c80ed56
+
+	/// Year-to-date net sales
+	measure 'Net Sales YTD' = TOTALYTD ( [Net Sales], Calendar[full_date] )
+		formatString: €#,0;-€#,0;€#,0
+		displayFolder: Comparisons
+		lineageTag: b0c5230e-e126-5b80-b4a2-611bca4f2d6c
+
+	/// Growth of the last selected month versus the month before
+	measure 'Latest Month MoM %' = VAR LastMonth = CALCULATE ( MAX ( Calendar[month_key] ), ALLSELECTED ( Calendar ) ) RETURN CALCULATE ( [MoM Growth %], Calendar[month_key] = LastMonth )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Comparisons
+		lineageTag: 707a56df-6ab4-5a32-bc44-acf157d6b3fd
+
+	/// Growth of the last selected month versus the same month one year earlier
+	measure 'Latest Month YoY %' = VAR LastMonth = CALCULATE ( MAX ( Calendar[month_key] ), ALLSELECTED ( Calendar ) ) RETURN CALCULATE ( [YoY Growth %], Calendar[month_key] = LastMonth )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Comparisons
+		lineageTag: 79202f10-9f6d-5f24-98f9-3032acd1b327
+
+	/// Share of the net sales of all categories (other filters kept)
+	measure 'Category Share %' = DIVIDE ( [Net Sales], CALCULATE ( [Net Sales], ALL ( Product[category] ) ) )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Sales
+		lineageTag: 9d6d50fa-de65-598d-9fed-3ca2cb1f4573
+
+	/// Rank of the product by net sales within the current selection
+	measure 'Product Rank' = IF ( NOT ISBLANK ( [Net Sales] ), RANKX ( ALLSELECTED ( Product[product_name] ), [Net Sales] ) )
+		formatString: 0
+		displayFolder: Sales
+		lineageTag: be2d7237-9a48-595d-955b-0e50f0c0e23e
+
+	/// Source rows excluded by the pipeline (each with its reason)
+	measure 'Rejected Rows' = COUNTROWS ( 'Rejected Rows' ) + 0
+		formatString: #,0
+		displayFolder: Data quality
+		lineageTag: 53a8081a-3dd7-50bf-a76e-2298b0d5d300
+
+	/// Quality and reconciliation checks that passed in the last run
+	measure 'Checks Passed' = COUNTROWS ( FILTER ( 'Quality Checks', 'Quality Checks'[passed] = "true" ) ) + 0
+		formatString: #,0
+		displayFolder: Data quality
+		lineageTag: 530a562a-a479-5116-b477-e7c8c806eaa4
+
+	/// Checks that failed (a published run always has 0)
+	measure 'Checks Failed' = COUNTROWS ( FILTER ( 'Quality Checks', 'Quality Checks'[passed] = "false" ) ) + 0
+		formatString: #,0
+		displayFolder: Data quality
+		lineageTag: 55b5728a-3e14-5896-8e89-05c983d82ff0
+
+	column order_id
+		dataType: string
+		lineageTag: 6572eab7-1aaf-5320-87a0-9f12fac48cc1
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column line_number
+		dataType: int64
+		lineageTag: 67bb6939-37f6-50f6-b4b4-4db346dc510f
+		summarizeBy: none
+		sourceColumn: line_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_key
+		dataType: int64
+		isHidden
+		lineageTag: 6e6dae3a-63df-5053-a9ce-de8dc79d64c2
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: e4288ed4-5e63-5bbd-bfea-e2cd646de392
+		summarizeBy: none
+		sourceColumn: order_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_id
+		dataType: string
+		isHidden
+		lineageTag: 6da50788-bc8b-5a77-a8f4-4458287e884a
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: string
+		lineageTag: 359bf440-af1f-55d2-8eba-45a0c32965da
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_segment
+		dataType: string
+		lineageTag: 05ead019-0a66-5a20-b6d8-bbb2c68b1162
+		summarizeBy: none
+		sourceColumn: customer_segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column region
+		dataType: string
+		lineageTag: 64e16328-f3b7-5219-a885-719bb7f0bb84
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = Automatic
+
+	column sales_channel
+		dataType: string
+		lineageTag: 77591649-8bcf-57c5-be25-53efee1a286f
+		summarizeBy: none
+		sourceColumn: sales_channel
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_status
+		dataType: string
+		lineageTag: 8a26802c-5a92-5f29-9b9e-0fd6cb4c034d
+		summarizeBy: none
+		sourceColumn: order_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_completed
+		dataType: int64
+		isHidden
+		lineageTag: d52db660-0f03-5fa6-bd3a-fd7065529a75
+		summarizeBy: none
+		sourceColumn: is_completed
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity
+		dataType: int64
+		lineageTag: 2a74e07c-646d-521b-91b4-69078f99b7a9
+		summarizeBy: sum
+		sourceColumn: quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_price
+		dataType: decimal
+		formatString: €#,0.00;-€#,0.00;€#,0.00
+		lineageTag: 682d26aa-4afb-5397-b7a1-2d4a1d9cbb2e
+		summarizeBy: sum
+		sourceColumn: unit_price
+
+		annotation SummarizationSetBy = Automatic
+
+	column discount_rate
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 31db5e96-6a26-5a3c-9ef7-be70e3822499
+		summarizeBy: none
+		sourceColumn: discount_rate
+
+		annotation SummarizationSetBy = Automatic
+
+	column gross_amount
+		dataType: decimal
+		formatString: €#,0.00;-€#,0.00;€#,0.00
+		lineageTag: 7939dc04-a095-5f3c-a358-174436c0b688
+		summarizeBy: sum
+		sourceColumn: gross_amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column discount_amount
+		dataType: decimal
+		formatString: €#,0.00;-€#,0.00;€#,0.00
+		lineageTag: 9f853f2f-a014-5b89-b9cb-437bb4bdc4bb
+		summarizeBy: sum
+		sourceColumn: discount_amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column net_amount
+		dataType: decimal
+		formatString: €#,0.00;-€#,0.00;€#,0.00
+		lineageTag: d06a6725-662c-5dc7-bb50-45a6649ba47e
+		summarizeBy: sum
+		sourceColumn: net_amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column cost_amount
+		dataType: decimal
+		formatString: €#,0.00;-€#,0.00;€#,0.00
+		lineageTag: aaac58dc-29d4-5313-a483-dd79d22d7868
+		summarizeBy: sum
+		sourceColumn: cost_amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column margin_amount
+		dataType: decimal
+		formatString: €#,0.00;-€#,0.00;€#,0.00
+		lineageTag: c4d19e51-d7a5-5d3d-aab4-64bec102d789
+		summarizeBy: sum
+		sourceColumn: margin_amount
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Sales = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\fact_sales.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"order_id", type text}, {"line_number", Int64.Type}, {"date_key", Int64.Type}, {"order_date", type date}, {"product_id", type text}, {"customer_id", type text}, {"customer_segment", type text}, {"region", type text}, {"sales_channel", type text}, {"order_status", type text}, {"is_completed", Int64.Type}, {"quantity", Int64.Type}, {"unit_price", Currency.Type}, {"discount_rate", type number}, {"gross_amount", Currency.Type}, {"discount_amount", Currency.Type}, {"net_amount", Currency.Type}, {"cost_amount", Currency.Type}, {"margin_amount", Currency.Type}}, "en-US")
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table

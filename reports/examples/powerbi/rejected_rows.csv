@@ -1,0 +1,24 @@
+source_table,source_line,reason,column_name,message
+order_lines,302,missing_value,product_id,product_id is empty
+order_lines,602,unknown_product,product_id,product P999 is not in the product catalog
+order_lines,902,out_of_range,quantity,0 is outside 1..100000
+order_lines,940,unknown_order,order_id,order SO-000401 is not an accepted order
+order_lines,941,unknown_order,order_id,order SO-000401 is not an accepted order
+order_lines,1202,invalid_number,quantity,'two' is not a whole number
+order_lines,1502,invalid_number,unit_price,"'12,50' is not an amount like 1234.56"
+order_lines,1802,out_of_range,discount_rate,1.50 is above 1
+order_lines,2103,duplicate_row,,"exact copy of line 2102 (order_id=SO-000886, line_number=2)"
+order_lines,2375,unknown_order,order_id,order SO-001000 is not an accepted order
+order_lines,2376,unknown_order,order_id,order SO-001000 is not an accepted order
+order_lines,3515,unknown_order,order_id,order SO-001500 is not an accepted order
+order_lines,3516,unknown_order,order_id,order SO-001500 is not an accepted order
+order_lines,4712,unknown_order,order_id,order SO-002000 is not an accepted order
+order_lines,4713,unknown_order,order_id,order SO-002000 is not an accepted order
+order_lines,9791,unknown_order,order_id,order SO-999999 is not an accepted order
+orders,103,duplicate_row,,exact copy of line 102 (order_id=SO-000101)
+orders,403,duplicate_key_conflict,,"order_id=SO-000401 appears on lines 403, 404 with different values"
+orders,404,duplicate_key_conflict,,"order_id=SO-000401 appears on lines 403, 404 with different values"
+orders,1003,invalid_date,order_date,'2025-02-30' is not a real calendar date
+orders,1503,missing_value,customer_segment,customer_segment is empty
+orders,2003,invalid_value,order_status,"'shipped?' is not one of completed, cancelled"
+products,30,duplicate_row,,exact copy of line 6 (product_id=P005)

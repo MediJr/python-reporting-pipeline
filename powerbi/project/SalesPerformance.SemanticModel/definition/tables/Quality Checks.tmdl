@@ -1,0 +1,62 @@
+table 'Quality Checks'
+	lineageTag: 85351ed8-00b0-5189-90d0-348703a23623
+
+	column name
+		dataType: string
+		lineageTag: a25e6a02-b4cc-529d-b6c3-b1e126a2079f
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		lineageTag: a5cc3559-c4c5-53d1-8fd2-04605c2b8aa0
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column passed
+		dataType: string
+		lineageTag: 720ceabe-f1b3-5b95-bded-465a62da57a0
+		summarizeBy: none
+		sourceColumn: passed
+
+		annotation SummarizationSetBy = Automatic
+
+	column expected
+		dataType: string
+		lineageTag: 93fe640e-149f-5ba6-be8c-99c403ba43ec
+		summarizeBy: none
+		sourceColumn: expected
+
+		annotation SummarizationSetBy = Automatic
+
+	column actual
+		dataType: string
+		lineageTag: 518bbd68-3e8f-5650-8a22-65fbde95bf10
+		summarizeBy: none
+		sourceColumn: actual
+
+		annotation SummarizationSetBy = Automatic
+
+	column detail
+		dataType: string
+		lineageTag: df9864fe-cff2-597a-a88c-ba4ef303ffad
+		summarizeBy: none
+		sourceColumn: detail
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Quality Checks' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\quality_checks.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"name", type text}, {"category", type text}, {"passed", type text}, {"expected", type text}, {"actual", type text}, {"detail", type text}}, "en-US")
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table

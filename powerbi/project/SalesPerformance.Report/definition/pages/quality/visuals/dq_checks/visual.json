@@ -1,0 +1,136 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "dq_checks",
+  "position": {
+    "x": 540,
+    "y": 212,
+    "z": 6000,
+    "width": 716,
+    "height": 496,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "drillFilterOtherVisuals": true,
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Quality Checks"
+                    }
+                  },
+                  "Property": "name"
+                }
+              },
+              "queryRef": "Quality Checks.name",
+              "nativeQueryRef": "name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Quality Checks"
+                    }
+                  },
+                  "Property": "category"
+                }
+              },
+              "queryRef": "Quality Checks.category",
+              "nativeQueryRef": "category"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Quality Checks"
+                    }
+                  },
+                  "Property": "passed"
+                }
+              },
+              "queryRef": "Quality Checks.passed",
+              "nativeQueryRef": "passed"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Quality Checks"
+                    }
+                  },
+                  "Property": "expected"
+                }
+              },
+              "queryRef": "Quality Checks.expected",
+              "nativeQueryRef": "expected"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Quality Checks"
+                    }
+                  },
+                  "Property": "actual"
+                }
+              },
+              "queryRef": "Quality Checks.actual",
+              "nativeQueryRef": "actual"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Checks run before publication'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "6D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

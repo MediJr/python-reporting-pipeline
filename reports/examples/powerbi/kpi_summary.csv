@@ -1,0 +1,17 @@
+position,kpi,label,value,unit,period,definition
+1,net_sales,Net sales,5069715.72,EUR,2024-07 to 2026-06,Sum of net line amounts of completed orders
+2,orders,Orders,3898,count,2024-07 to 2026-06,Completed orders with at least one valid line
+3,units,Units sold,53383,count,2024-07 to 2026-06,Quantity of completed lines
+4,active_customers,Active customers,918,count,2024-07 to 2026-06,Distinct customers with a completed order
+5,average_order_value,Average order value,1300.59,EUR,2024-07 to 2026-06,Net sales / orders
+6,gross_margin,Gross margin,1987329.32,EUR,2024-07 to 2026-06,Net sales - quantity x catalog unit cost
+7,gross_margin_rate,Gross margin rate,0.3920,ratio,2024-07 to 2026-06,Gross margin / net sales
+8,discount_rate,Average discount,0.0499,ratio,2024-07 to 2026-06,Discount amount / gross sales (completed orders)
+9,cancellation_rate,Cancellation rate,0.0614,ratio,2024-07 to 2026-06,Cancelled orders / all orders with valid lines
+10,latest_month_net_sales,"Net sales, latest month",230101.95,EUR,2026-06,Net sales of the last month in the data
+11,mom_growth,Growth vs previous month,0.0877,ratio,2026-06,(latest month - previous month) / previous month
+12,yoy_growth,Growth vs same month last year,0.1587,ratio,2026-06,(latest month - same month one year earlier) / same month one year earlier
+13,last_12_months_net_sales,"Net sales, last 12 months",2785629.92,EUR,2025-07 to 2026-06,Sum of the last 12 months
+14,rolling_12_months_growth,"Growth, last 12 vs prior 12 months",0.2196,ratio,2025-07 to 2026-06,(last 12 months - the 12 months before) / the 12 months before
+15,top_category,Top category,Technology (3120157.29),text,2024-07 to 2026-06,Category with the highest net sales
+16,top_product,Top product,Laptop 16in (1189828.25),text,2024-07 to 2026-06,Product with the highest net sales

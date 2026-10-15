@@ -1,0 +1,7 @@
+relationship fcfbd210-0b1e-58db-a4d7-4cc2a331c1c2
+	fromColumn: Sales.date_key
+	toColumn: Calendar.date_key
+
+relationship 5b20d187-1c5f-5f09-a9f2-6703d2d228f0
+	fromColumn: Sales.product_id
+	toColumn: Product.product_id

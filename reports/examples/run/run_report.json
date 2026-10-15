@@ -1,0 +1,523 @@
+{
+  "report_version": 1,
+  "tool": {
+    "name": "python-reporting-pipeline",
+    "version": "0.1.0"
+  },
+  "project": "monthly-sales-reporting",
+  "run_id": "83c5dbc3-3281-45d9-8505-04d613789b7a",
+  "started_at": "2026-10-14T23:52:50.571Z",
+  "finished_at": "2026-10-14T23:52:51.437Z",
+  "duration_s": 0.866,
+  "status": "success_with_rejections",
+  "exit_code": 0,
+  "engine": "sqlite",
+  "sources": {
+    "orders": {
+      "file": "data/sample/orders.csv",
+      "sha256": "e4a2bf4e269387958156fb195f66fe3ae46bedbe156a7ebdf993b4c48f033824",
+      "rows_read": 4159,
+      "accepted_by_csv_checks": 4153,
+      "normalized_values": 2
+    },
+    "order_lines": {
+      "file": "data/sample/order_lines.csv",
+      "sha256": "f3d8e728cc87d49cb394612943f7a4b68e2a34a3e630ae85f9f8c8b5f1891b60",
+      "rows_read": 9790,
+      "accepted_by_csv_checks": 9784,
+      "normalized_values": 0
+    },
+    "products": {
+      "file": "data/sample/products.csv",
+      "sha256": "6d9200d19481fc92f2ed89fbd6ac4c982551823706d50dec2562321200e60b9c",
+      "rows_read": 29,
+      "accepted_by_csv_checks": 28,
+      "normalized_values": 0
+    }
+  },
+  "rejections": {
+    "total": 23,
+    "by_table": {
+      "orders": 6,
+      "order_lines": 16,
+      "products": 1
+    },
+    "by_reason": [
+      {
+        "table": "order_lines",
+        "reason": "duplicate_row",
+        "rows": 1
+      },
+      {
+        "table": "order_lines",
+        "reason": "invalid_number",
+        "rows": 2
+      },
+      {
+        "table": "order_lines",
+        "reason": "missing_value",
+        "rows": 1
+      },
+      {
+        "table": "order_lines",
+        "reason": "out_of_range",
+        "rows": 2
+      },
+      {
+        "table": "order_lines",
+        "reason": "unknown_order",
+        "rows": 9
+      },
+      {
+        "table": "order_lines",
+        "reason": "unknown_product",
+        "rows": 1
+      },
+      {
+        "table": "orders",
+        "reason": "duplicate_key_conflict",
+        "rows": 2
+      },
+      {
+        "table": "orders",
+        "reason": "duplicate_row",
+        "rows": 1
+      },
+      {
+        "table": "orders",
+        "reason": "invalid_date",
+        "rows": 1
+      },
+      {
+        "table": "orders",
+        "reason": "invalid_value",
+        "rows": 1
+      },
+      {
+        "table": "orders",
+        "reason": "missing_value",
+        "rows": 1
+      },
+      {
+        "table": "products",
+        "reason": "duplicate_row",
+        "rows": 1
+      }
+    ]
+  },
+  "model_rows": {
+    "dim_date": 730,
+    "dim_product": 28,
+    "fact_sales": 9774,
+    "mart_monthly_sales": 24,
+    "mart_category_monthly": 96,
+    "mart_product_performance": 28,
+    "mart_segment_region": 12,
+    "kpi_summary": 16,
+    "rejected_rows": 23
+  },
+  "checks": [
+    {
+      "name": "rejected_rate_orders",
+      "category": "gate",
+      "passed": true,
+      "expected": "<= 1.00%",
+      "actual": "0.14%",
+      "detail": "6 of 4159 orders row(s) rejected"
+    },
+    {
+      "name": "rejected_rate_order_lines",
+      "category": "gate",
+      "passed": true,
+      "expected": "<= 1.00%",
+      "actual": "0.16%",
+      "detail": "16 of 9790 order_lines row(s) rejected"
+    },
+    {
+      "name": "rejected_rate_products",
+      "category": "gate",
+      "passed": true,
+      "expected": "<= 5.00%",
+      "actual": "3.45%",
+      "detail": "1 of 29 products row(s) rejected"
+    },
+    {
+      "name": "fact_rows_match_valid_lines",
+      "category": "reconciliation",
+      "passed": true,
+      "expected": 9774,
+      "actual": 9774,
+      "detail": "accepted order lines minus lines rejected by referential integrity = fact rows (no row lost or multiplied)"
+    },
+    {
+      "name": "fact_key_unique",
+      "category": "integrity",
+      "passed": true,
+      "expected": 9774,
+      "actual": 9774,
+      "detail": "one fact row per (order_id, line_number)"
+    },
+    {
+      "name": "fact_products_in_dimension",
+      "category": "integrity",
+      "passed": true,
+      "expected": 0,
+      "actual": 0,
+      "detail": "fact rows whose product is missing from dim_product"
+    },
+    {
+      "name": "fact_dates_in_dimension",
+      "category": "integrity",
+      "passed": true,
+      "expected": 0,
+      "actual": 0,
+      "detail": "fact rows whose date is missing from dim_date"
+    },
+    {
+      "name": "fact_critical_nulls",
+      "category": "integrity",
+      "passed": true,
+      "expected": 0,
+      "actual": 0,
+      "detail": "missing values in key or amount columns of the fact table"
+    },
+    {
+      "name": "dim_date_continuous",
+      "category": "integrity",
+      "passed": true,
+      "expected": 730,
+      "actual": 730,
+      "detail": "calendar from 20240701 to 20260630 without duplicate days"
+    },
+    {
+      "name": "net_sales_python_vs_sql",
+      "category": "reconciliation",
+      "passed": true,
+      "expected": 506971572,
+      "actual": 506971572,
+      "detail": "net sales recomputed in Python from the source rows = SQL fact total (cents)"
+    },
+    {
+      "name": "mart_monthly_sales_net_sales",
+      "category": "reconciliation",
+      "passed": true,
+      "expected": 506971572,
+      "actual": 506971572,
+      "detail": "total net sales of mart_monthly_sales = fact total (cents)"
+    },
+    {
+      "name": "mart_category_monthly_net_sales",
+      "category": "reconciliation",
+      "passed": true,
+      "expected": 506971572,
+      "actual": 506971572,
+      "detail": "total net sales of mart_category_monthly = fact total (cents)"
+    },
+    {
+      "name": "mart_product_performance_net_sales",
+      "category": "reconciliation",
+      "passed": true,
+      "expected": 506971572,
+      "actual": 506971572,
+      "detail": "total net sales of mart_product_performance = fact total (cents)"
+    },
+    {
+      "name": "mart_segment_region_net_sales",
+      "category": "reconciliation",
+      "passed": true,
+      "expected": 506971572,
+      "actual": 506971572,
+      "detail": "total net sales of mart_segment_region = fact total (cents)"
+    },
+    {
+      "name": "monthly_orders",
+      "category": "reconciliation",
+      "passed": true,
+      "expected": 3898,
+      "actual": 3898,
+      "detail": "sum of monthly orders = distinct completed orders (an order belongs to one month)"
+    },
+    {
+      "name": "segment_orders",
+      "category": "reconciliation",
+      "passed": true,
+      "expected": 3898,
+      "actual": 3898,
+      "detail": "sum of orders per segment and region = distinct completed orders"
+    },
+    {
+      "name": "monthly_units",
+      "category": "reconciliation",
+      "passed": true,
+      "expected": 53383,
+      "actual": 53383,
+      "detail": "sum of monthly units = fact units"
+    },
+    {
+      "name": "category_shares_sum_to_100pct",
+      "category": "reconciliation",
+      "passed": true,
+      "expected": [],
+      "actual": [],
+      "detail": "category shares of each month add up to 100 % (within rounding of 1 bp per category)"
+    },
+    {
+      "name": "orders_without_valid_lines",
+      "category": "info",
+      "passed": true,
+      "expected": "-",
+      "actual": 0,
+      "detail": "accepted orders with no valid line: not in the fact table (they have no amount)"
+    }
+  ],
+  "kpis": [
+    {
+      "kpi": "net_sales",
+      "label": "Net sales",
+      "value": "5069715.72",
+      "unit": "EUR",
+      "period": "2024-07 to 2026-06",
+      "definition": "Sum of net line amounts of completed orders"
+    },
+    {
+      "kpi": "orders",
+      "label": "Orders",
+      "value": "3898",
+      "unit": "count",
+      "period": "2024-07 to 2026-06",
+      "definition": "Completed orders with at least one valid line"
+    },
+    {
+      "kpi": "units",
+      "label": "Units sold",
+      "value": "53383",
+      "unit": "count",
+      "period": "2024-07 to 2026-06",
+      "definition": "Quantity of completed lines"
+    },
+    {
+      "kpi": "active_customers",
+      "label": "Active customers",
+      "value": "918",
+      "unit": "count",
+      "period": "2024-07 to 2026-06",
+      "definition": "Distinct customers with a completed order"
+    },
+    {
+      "kpi": "average_order_value",
+      "label": "Average order value",
+      "value": "1300.59",
+      "unit": "EUR",
+      "period": "2024-07 to 2026-06",
+      "definition": "Net sales / orders"
+    },
+    {
+      "kpi": "gross_margin",
+      "label": "Gross margin",
+      "value": "1987329.32",
+      "unit": "EUR",
+      "period": "2024-07 to 2026-06",
+      "definition": "Net sales - quantity x catalog unit cost"
+    },
+    {
+      "kpi": "gross_margin_rate",
+      "label": "Gross margin rate",
+      "value": "0.3920",
+      "unit": "ratio",
+      "period": "2024-07 to 2026-06",
+      "definition": "Gross margin / net sales"
+    },
+    {
+      "kpi": "discount_rate",
+      "label": "Average discount",
+      "value": "0.0499",
+      "unit": "ratio",
+      "period": "2024-07 to 2026-06",
+      "definition": "Discount amount / gross sales (completed orders)"
+    },
+    {
+      "kpi": "cancellation_rate",
+      "label": "Cancellation rate",
+      "value": "0.0614",
+      "unit": "ratio",
+      "period": "2024-07 to 2026-06",
+      "definition": "Cancelled orders / all orders with valid lines"
+    },
+    {
+      "kpi": "latest_month_net_sales",
+      "label": "Net sales, latest month",
+      "value": "230101.95",
+      "unit": "EUR",
+      "period": "2026-06",
+      "definition": "Net sales of the last month in the data"
+    },
+    {
+      "kpi": "mom_growth",
+      "label": "Growth vs previous month",
+      "value": "0.0877",
+      "unit": "ratio",
+      "period": "2026-06",
+      "definition": "(latest month - previous month) / previous month"
+    },
+    {
+      "kpi": "yoy_growth",
+      "label": "Growth vs same month last year",
+      "value": "0.1587",
+      "unit": "ratio",
+      "period": "2026-06",
+      "definition": "(latest month - same month one year earlier) / same month one year earlier"
+    },
+    {
+      "kpi": "last_12_months_net_sales",
+      "label": "Net sales, last 12 months",
+      "value": "2785629.92",
+      "unit": "EUR",
+      "period": "2025-07 to 2026-06",
+      "definition": "Sum of the last 12 months"
+    },
+    {
+      "kpi": "rolling_12_months_growth",
+      "label": "Growth, last 12 vs prior 12 months",
+      "value": "0.2196",
+      "unit": "ratio",
+      "period": "2025-07 to 2026-06",
+      "definition": "(last 12 months - the 12 months before) / the 12 months before"
+    },
+    {
+      "kpi": "top_category",
+      "label": "Top category",
+      "value": "Technology (3120157.29)",
+      "unit": "text",
+      "period": "2024-07 to 2026-06",
+      "definition": "Category with the highest net sales"
+    },
+    {
+      "kpi": "top_product",
+      "label": "Top product",
+      "value": "Laptop 16in (1189828.25)",
+      "unit": "text",
+      "period": "2024-07 to 2026-06",
+      "definition": "Product with the highest net sales"
+    }
+  ],
+  "exports": [
+    {
+      "file": "output/powerbi/dim_date.csv",
+      "rows": 730,
+      "sha256": "ce9954fcb3662839f8f2819894671471b995f8e0f8bdfcd53f3f69930d5092c4"
+    },
+    {
+      "file": "output/powerbi/dim_product.csv",
+      "rows": 28,
+      "sha256": "45c10f0b77b6478650625ef1a58e498b45c881dd0b17ec85147f95881d2a37dd"
+    },
+    {
+      "file": "output/powerbi/fact_sales.csv",
+      "rows": 9774,
+      "sha256": "b47b58d6e4e7e05fac7ba7741129c23db4aebd2a8c1cf8649a4bc1d53f227ca5"
+    },
+    {
+      "file": "output/powerbi/mart_monthly_sales.csv",
+      "rows": 24,
+      "sha256": "1d4ad6a479925b4c5481198196548b3d2b0871e748de3698ae4fbc9cf34d350d"
+    },
+    {
+      "file": "output/powerbi/mart_category_monthly.csv",
+      "rows": 96,
+      "sha256": "d4e1cf5e82723ac52f34ac1e5b7597ecd82682d2acfdc17228474faeefa52929"
+    },
+    {
+      "file": "output/powerbi/mart_product_performance.csv",
+      "rows": 28,
+      "sha256": "39beced3a7930295b7c342e2efcd0dd1866836dac40b0c03fed0a43b771bde79"
+    },
+    {
+      "file": "output/powerbi/mart_segment_region.csv",
+      "rows": 12,
+      "sha256": "1d0954624ab3aface1c1a9f6e726119bcc2affb6db37eac847e9ba25b106661e"
+    },
+    {
+      "file": "output/powerbi/kpi_summary.csv",
+      "rows": 16,
+      "sha256": "77f9c014491a6d0ba4ee6177b53b5b912888067393730ec3fe11af1497a28274"
+    },
+    {
+      "file": "output/powerbi/rejected_rows.csv",
+      "rows": 23,
+      "sha256": "9d3c9dc9002cbb5516644e7ef08fc8044760b9c72143dd89848f3150ee87fe93"
+    },
+    {
+      "file": "output/powerbi/quality_checks.csv",
+      "rows": 19,
+      "sha256": "ac0a52c6dc6975d5230a0064d87085fc016a9700f4f488a1dbd061151b076a1a"
+    }
+  ],
+  "steps": [
+    {
+      "step": "read_orders",
+      "status": "success",
+      "duration_s": 0.055
+    },
+    {
+      "step": "read_order_lines",
+      "status": "success",
+      "duration_s": 0.139
+    },
+    {
+      "step": "read_products",
+      "status": "success",
+      "duration_s": 0.002
+    },
+    {
+      "step": "connect_warehouse",
+      "status": "success",
+      "duration_s": 0.007
+    },
+    {
+      "step": "create_schema",
+      "status": "success",
+      "duration_s": 0.023
+    },
+    {
+      "step": "load_staging",
+      "status": "success",
+      "duration_s": 0.052
+    },
+    {
+      "step": "referential_integrity",
+      "status": "success",
+      "duration_s": 0.011
+    },
+    {
+      "step": "build_model",
+      "status": "success",
+      "duration_s": 0.05
+    },
+    {
+      "step": "build_marts",
+      "status": "success",
+      "duration_s": 0.082
+    },
+    {
+      "step": "quality_checks",
+      "status": "success",
+      "duration_s": 0.067
+    },
+    {
+      "step": "compute_kpis",
+      "status": "success",
+      "duration_s": 0.005
+    },
+    {
+      "step": "export_powerbi",
+      "status": "success",
+      "duration_s": 0.359
+    }
+  ],
+  "errors": [],
+  "warnings": [],
+  "environment": {
+    "python": "3.14.7",
+    "platform": "Windows-11-10.0.26300-SP0"
+  }
+}
