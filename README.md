@@ -263,6 +263,14 @@ More in [docs/architecture.md](docs/architecture.md#limitations-and-possible-imp
 Incremental loading by period, a customer dimension, a PostgreSQL source connector, CI on Linux, a
 benchmark on larger volumes, publication of the semantic model to the Power BI service.
 
+## Related projects
+
+Three independent projects covering the data chain, from raw files to the dashboard:
+
+1. **Data cleaning** — rule-based cleaning of CSV/Excel files with a full quality report: [python-data-cleaning-toolkit](https://github.com/MediJr/python-data-cleaning-toolkit)
+1. **Data workflow automation** — declarative YAML workflows with verified exports: [python-data-automation-toolkit](https://github.com/MediJr/python-data-automation-toolkit)
+1. **Sales reporting** — quality checks, SQL star schema, KPIs and a Power BI dashboard — *this repository*
+
 ## License
 
 [MIT](LICENSE) — Copyright (c) 2026 LUMU BAMANA MANASSE.
